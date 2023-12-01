@@ -3,16 +3,16 @@
     ## ======== ORCA setup ============
 
     ## 
-orcadir /usr/license/orca41/orca41/
+orcadir /home/raphael/1XX_General/109_Software/109.02_Chemistry/orca/
 
-tinker /user/lea/master/tinker-6.3.3/
+# tinker /user/lea/master/tinker-6.3.3/
 
 
     ## ======== SCRATCH and SAVE ============
 
     ## Sets the path to the scratch directory employed by the interface.
     ## There, all ORCA and overlap calculations will be launched.
-scratchdir $TMPDIR
+scratchdir /tmp
 
     ## Sets the path to the save directory.
     ## There, all chk, fchk, rwf, determinant, MO coefficient, and AO overlap files are stored between time steps.
@@ -77,7 +77,7 @@ numocc 0
     ## ======== TheoDORE ============
 
     ## Path to the TheoDORE installation.
-theodir /user/mai/SHARC/TheoDORE/TheoDORE_1.7.2/
+theodir /home/raphael/1XX_General/109_Software/109.02_Chemistry/TheoDORE_3.0
 #theodir /user/plasserf/programs/TheoDORE/GIT/
 
 

@@ -29,7 +29,7 @@
 
 # =======================================
 #true, false     # also implies NETCDF
-USE_PYSHARC := false
+USE_PYSHARC := True
 
 #intel, gnu
 USE_COMPILER := gnu
@@ -38,7 +38,7 @@ USE_COMPILER := gnu
 USE_LIBS := gnu
 
 #needed for PYSHARC
-ANACONDA := 
+ANACONDA := /home/raphael/1XX_General/109_Software/109.05_Python/mambaforce/envs/chemtools37
 # =======================================
 
 
@@ -99,8 +99,8 @@ endif
 
 
 # include files
-# FINCLUDE= -I$(SHARC_SOURCE)/
-FINCLUDE= 
+FINCLUDE= -I$(SHARC_SOURCE)/
+#FINCLUDE= 
 CINCLUDE= -I$(ANACONDA)/include
 
 # flags

@@ -495,11 +495,5 @@ sharc_module_init(void)
 /* DEFINE NEW MODULE SHARC */
 MOD_INIT(sharc)
 {
-#if PY_MAJOR_VERSION >= 3
     return sharc_module_init();
-#else
-    PyObject * mod=sharc_module_init();
-    if (mod == NULL)
-        return ;
-#endif
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 #******************************************
 #
@@ -47,8 +47,8 @@ def json_loads_byteified(json_text):
 
 def _byteify(data, ignore_dicts = False):
     # if this is a unicode string, return its string representation
-    if isinstance(data, unicode):
-        return data.encode('utf-8')
+    if isinstance(data, str):
+        return data#.encode('utf-8')
     # if this is a list of values, return list of byteified values
     if isinstance(data, list):
         return [ _byteify(item, ignore_dicts=True) for item in data ]
@@ -57,7 +57,7 @@ def _byteify(data, ignore_dicts = False):
     if isinstance(data, dict) and not ignore_dicts:
         return {
             _byteify(key, ignore_dicts=True): _byteify(value, ignore_dicts=True)
-            for key, value in data.iteritems()
+            for key, value in data.items()
         }
     # if it's anything else, return it in its original form
     return data
@@ -79,10 +79,6 @@ def _byteify(data, ignore_dicts = False):
 
 #import sys 
 import datetime
-
-if sys.version_info[0] != 2:
-  print 'This is a script for Python 2!'
-  sys.exit(0)
 
 if sys.version_info[1] < 5:
   def any(iterable):
@@ -413,11 +409,11 @@ def centerstring(string, n, pad=' '):
   if l >= n:
     return string
   else:
-    return  pad * ((n - l + 1) / 2) + string + pad * ((n - l) / 2)
+    return  pad * ((n - l + 1) // 2) + string + pad * ((n - l) // 2)
 
 
 def displaywelcome():
-  print 'Script for setup of displacements started...\n'
+  print('Script for setup of displacements started...\n')
   string='\n'
   string+='  '+'='*80+'\n'
   string+='||'+centerstring('',80)+'||\n'
@@ -430,14 +426,14 @@ def displaywelcome():
   string+='||'+centerstring('',80)+'||\n'
   string+='  '+'='*80+'\n\n'
   string+='This script automatizes the setup of excited-state calculations for displacements\nfor SHARC dynamics.'
-  print string
+  print(string)
 
 
 #def question(question,typefunc,default=None,autocomplete=True,ranges=False):
   #KEYSTROKES=open('KEYSTROKES.tmp','a')
   #if typefunc==int or typefunc==float:
     #if not default==None and not isinstance(default,list):
-      #print 'Default to int or float question must be list!'
+      #print('Default to int or float question must be list!')
       #quit(1)
   #if typefunc==str and autocomplete:
     #readline.set_completer_delims(' \t\n;')
@@ -483,7 +479,7 @@ def displaywelcome():
         #KEYSTROKES.write(line+' '*(40-len(line))+' #'+s+'\n')
         #return False
       #else:
-        #print 'I didn''t understand you.'
+        #print('I didn''t understand you.')
         #continue
 
     #if typefunc==str:
@@ -499,7 +495,7 @@ def displaywelcome():
         #KEYSTROKES.write(line+' '*(40-len(line))+' #'+s+'\n')
         #return f
       #except ValueError:
-        #print 'Please enter floats!'
+        #print('Please enter floats!')
         #continue
 
     #if typefunc==int:
@@ -518,16 +514,16 @@ def displaywelcome():
         #return out
       #except ValueError:
         #if ranges:
-          #print 'Please enter integers or ranges of integers (e.g. "-3~-1  2  5~7")!'
+          #print('Please enter integers or ranges of integers (e.g. "-3~-1  2  5~7")!')
         #else:
-          #print 'Please enter integers!'
+          #print('Please enter integers!')
         #continue
   
   #KEYSTROKES.close()
 
 
 #def print_INFOS(INFOS):
-  #print '\n' + centerstring('Full input', 60, '#') + '\n'
+  #print('\n' + centerstring('Full input', 60, '#') + '\n')
   
   #for item in INFOS:
     #i = 0 # counter for very long lists we do not want full output)
@@ -537,10 +533,10 @@ def displaywelcome():
       #for elem in INFOS[item]:
         #if i >= 10: break
         #if first:
-          #print item, ' ' * (25 - len(item) - 1), elem
+          #print(item, ' ' * (25 - len(item) - 1), elem)
           #first = False
         #else:
-          #print ' ' * 25, elem
+          #print(' ' * 25, elem)
 
         #i += 1
 
@@ -550,18 +546,18 @@ def displaywelcome():
       #for k, v in INFOS[item].items():
         #if i >= 10: break
         #if first:
-          #print item, ' ' * (25 - len(item)) + '%s: %s' % (k, v)
+          #print(item, ' ' * (25 - len(item)) + '%s: %s' % (k, v))
           #first = False
         #else:
-          #print ' ' * 25 + ' %s: %s' % (k, v)
+          #print(' ' * 25 + ' %s: %s' % (k, v))
 
         #i += 1
-    #else: print item, ' ' * (25 - len(item) - 1), INFOS[item]
+    #else: print(item, ' ' * (25 - len(item) - 1), INFOS[item])
 
     #if i >= 10:
-      #print ' ' * 25, '.'
-      #print ' ' * 25, '(' + str(len(INFOS[item]) - i) + ' more)'
-      #print ' ' * 25, '.'
+      #print(' ' * 25, '.')
+      #print(' ' * 25, '(' + str(len(INFOS[item]) - i) + ' more)')
+      #print(' ' * 25, '.')
   #return
 
 
@@ -704,7 +700,7 @@ def readfile(filename):
     out=f.readlines()
     f.close()
   except IOError:
-    print 'File %s does not exist!' % (filename)
+    print('File %s does not exist!' % (filename))
     sys.exit(12)
   return out
 # ======================================================================= #
@@ -737,7 +733,7 @@ def read_QMout(path,nstates,natom,request):
       while True:
         iline+=1
         if iline>=len(lines):
-          print 'Could not find "%s" (flag "%i") in file %s!' % (t,targets[t]['flag'],path)
+          print('Could not find "%s" (flag "%i") in file %s!' % (t,targets[t]['flag'],path))
           sys.exit(11)
         line=lines[iline]
         if '! %i' % (targets[t]['flag']) in line:
@@ -886,7 +882,7 @@ def loewdin_orthonormalization(A):
   # normalize A_lo
   A_lo = A_lo.T
   length = len(A_lo)
-  A_lon = np.zeros((length, length), dtype = np.complex)
+  A_lon = np.zeros((length, length), dtype = complex)
 
   for i in range(length):
     norm_of_col = np.linalg.norm(A_lo[i])
@@ -969,7 +965,7 @@ def check_overlap_diagonal(matrix, states, normal_mode, displacement, ignore_pro
     for state in range(len(part_matrix)):
       sum_column = sum([part_matrix[j][state] ** 2 for j in range(len(part_matrix))])
       if sum_column < 0.5:
-        print '* Problematic state %i in %i%s: %s' % (state + 1, int(normal_mode), displacement, IToMult[imult + 1])
+        print('* Problematic state %i in %i%s: %s' % (state + 1, int(normal_mode), displacement, IToMult[imult + 1]))
         problematic_states[str(normal_mode) + displacement] = imult + 1
 
   return problematic_states
@@ -1000,17 +996,17 @@ def write_LVC_template(INFOS):
   lvc_template_content = '%s\n' % (INFOS['v0f'])
   lvc_template_content += str(INFOS['states'])[1:-1].replace(',', '') + '\n'
 
-  #print INFOS
+  #print(INFOS)
 
-  # print some infos
-  print '\nData extraction started ...'
-  print 'Number of states:',INFOS['nstates']
-  print 'Number of atoms:',len(INFOS['atoms'])
-  print 'Kappas:', ['numerical','analytical'][INFOS['ana_grad']]
-  print 'Lambdas:', ['numerical','analytical'][INFOS['ana_nac']]
+  # print(some infos)
+  print('\nData extraction started ...')
+  print('Number of states:',INFOS['nstates'])
+  print('Number of atoms:',len(INFOS['atoms']))
+  print('Kappas:', ['numerical','analytical'][INFOS['ana_grad']])
+  print('Lambdas:', ['numerical','analytical'][INFOS['ana_nac']])
   print
-  print 'Reading files ...'
-  print 
+  print('Reading files ...')
+  print()
 
   # extract data from central point
   requests=['h','dm']
@@ -1019,7 +1015,7 @@ def write_LVC_template(INFOS):
   if INFOS['ana_nac']:
     requests.append('nacdr')
   path=os.path.join(INFOS['paths']['0eq'] , 'QM.out')
-  print path, requests
+  print(path, requests)
   QMout_eq = read_QMout(path , INFOS['nstates'], len(INFOS['atoms']), requests)
 
   # ------------------ epsilon ----------------------
@@ -1115,7 +1111,7 @@ def write_LVC_template(INFOS):
 
   if not ( INFOS['ana_nac'] and INFOS['ana_grad'] ):
     if not 'displacements' in INFOS:
-      print 'No displacement info found in "displacements.json"!'
+      print('No displacement info found in "displacements.json"!')
       sys.exit(1)
 
     if not INFOS['ana_nac'] and not INFOS['ana_grad']:
@@ -1136,10 +1132,10 @@ def write_LVC_template(INFOS):
       # get hamiltonian & overlap matrix from QM.out
       path=os.path.join(INFOS['paths'][str(normal_mode) + 'p'] , 'QM.out')
       requests=['h', 'overlap']
-      print path, requests
+      print(path, requests)
       pos_H, pos_S = read_QMout(path , INFOS['nstates'], len(INFOS['atoms']), requests).values()
 
-      # check diagonal of S & print warning
+      # check diagonal of S & print(warning)
       INFOS['problematic_mults'] = check_overlap_diagonal(pos_S, INFOS['states'], normal_mode, 'p', INFOS['ignore_problematic_states'])
 
       # calculate displacement matrix
@@ -1155,10 +1151,10 @@ def write_LVC_template(INFOS):
         # get hamiltonian & overlap matrix from QM.out
         path=os.path.join(INFOS['paths'][str(normal_mode) + 'n'] , 'QM.out')
         requests=['h', 'overlap']
-        print path, requests
+        print(path, requests)
         neg_H, neg_S = read_QMout(path , INFOS['nstates'], len(INFOS['atoms']), requests).values()
 
-        # check diagonal of S & print warning if wanted
+        # check diagonal of S & print(warning if wanted)
         INFOS['problematic_mults'].update(check_overlap_diagonal(neg_S, INFOS['states'], normal_mode, 'n', INFOS['ignore_problematic_states']))
 
         # calculate displacement matrix
@@ -1172,11 +1168,11 @@ def write_LVC_template(INFOS):
         if INFOS['ignore_problematic_states']:
           if str(normal_mode) + 'p' in INFOS['problematic_mults']:
             if INFOS['problematic_mults'][str(normal_mode) + 'p'] == imult + 1:
-              print 'Not producing %s for normal mode: %s' % (whatstring,normal_mode)
+              print('Not producing %s for normal mode: %s' % (whatstring,normal_mode))
               continue
           if str(normal_mode) + 'n' in INFOS['problematic_mults']:
             if twosided and INFOS['problematic_mults'][str(normal_mode) + 'n'] == imult + 1:
-              print '! Not producing %s for multiplicity %i for normal mode: %s' % (whatstring,imult+1,normal_mode)
+              print('! Not producing %s for multiplicity %i for normal mode: %s' % (whatstring,imult+1,normal_mode))
               continue
 
         # partition matrices
@@ -1231,7 +1227,7 @@ def write_LVC_template(INFOS):
 
 
   # -------------------- write to file ----------------------------
-  print '\nFinished!\nLVC parameters written to file: LVC.template\n'
+  print('\nFinished!\nLVC parameters written to file: LVC.template\n')
   lvc_template = open('LVC.template', 'w')
   lvc_template.write(lvc_template_content)
   lvc_template.close()
@@ -1259,7 +1255,7 @@ def main():
       INFOS = json_load_byteified(displacement_info)
       displacement_info.close()
   except IOError:
-    print 'IOError during opening readable %s - file. Quitting.' % (displacement_info_filename)
+    print('IOError during opening readable %s - file. Quitting.' % (displacement_info_filename))
     quit(1)
 
   # set manually for old calcs
@@ -1276,5 +1272,5 @@ if __name__ == '__main__':
   try:
     main()
   except KeyboardInterrupt:
-    print '\nCtrl+C occured. Exiting.\n'
+    print('\nCtrl+C occured. Exiting.\n')
     sys.exit()

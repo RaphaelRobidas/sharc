@@ -165,10 +165,6 @@ static PyMemberDef QMout_members[] = {
 static PyObject *
 QMout_printInfo(QMout * self)
 {
-#if PY_MAJOR_VERSION < 3 
-    printf("QMout file for Interface: '%s'\n", PyString_AsString(self->interface_name));
-    printf("NAtoms = %d\nNStates = %d\n", self->NAtoms, self->NStates);
-#endif
 
     for (int istate=0; istate < self->NStates; istate++){
         printf("Gradient of state '%d'\n", istate);
@@ -188,10 +184,6 @@ QMout_printInfo(QMout * self)
 static PyObject *
 QMout_printAll(QMout * self)
 {
-#if PY_MAJOR_VERSION < 3 
-    printf("QMout file for Interface: '%s'\n", PyString_AsString(self->interface_name));
-    printf("NAtoms = %d\nNStates = %d\n", self->NAtoms, self->NStates);
-#endif
 
     if (self->iset_h == 1) {
         printf("HAMILTONIAN\n");

@@ -55,8 +55,8 @@ pysharc_cfiles = ['pysharc.c', 'pysharc_tools.c']
 
 # define Libraries
 mkl_libs = []
-basic_libs = ['sharc']#, 'hdf5', 'hdf5_hl', 'netcdf']
-#basic_libs = ['sharc', 'gfortran', 'hdf5', 'hdf5_hl', 'netcdf']
+#basic_libs = ['sharc', 'hdf5', 'hdf5_hl', 'netcdf']
+basic_libs = ['sharc', 'gfortran', 'hdf5', 'hdf5_hl', 'netcdf']
 extra_compile_args = ['-std=c99', '-Wall',]
 #extra_compile_args += ['-D__PYTHON_DEBUG__', '-Wall']
 
@@ -87,7 +87,7 @@ author_email='maximilian.menger@univie.ac.at'
 url='https://sharc-md.org'
 
 
-sharc_packages = [ 'sharc', 'sharc.pysharc' ]
+sharc_packages = [ 'sharc', 'sharc.pysharc', 'sharc.setup_sharc' ]
 sharc_scripts =  [ 'bin/pysharc_lvc.py', 'bin/pysharc_qmout.py' ]
 
 
@@ -101,8 +101,8 @@ setup(name=prog_name,
       scripts = sharc_scripts,
       ext_modules=[pysharc_extension],
       install_requires=[
-#                    'netcdf4', # for correct libraries
-#                    'hdf5',    # for the libraries
+                    'netcdf4', # for correct libraries
+                    'hdf5',    # for the libraries
                     'mkl',
                           ],
 )

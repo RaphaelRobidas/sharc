@@ -1,6 +1,4 @@
-export SHARC=$HOME/sharc/bin
-export PYSHARC=$SHARC/../pysharc
-export SHARCLIB=$SHARC/../lib
-export ANACONDA=$HOME/anaconda2/
-export PYTHONPATH=$SHARCLIB:$PYSHARC:$PYTHONPATH
-export LD_LIBRARY_PATH=$SHARCLIB:$ANACONDA/lib:$LD_LIBRARY_PATH
+export SHARC=/home/raphael/1XX_General/109_Software/109.02_Chemistry/sharc/source/../bin
+export SHARCLIB=/home/raphael/1XX_General/109_Software/109.02_Chemistry/sharc/source/../lib
+export PYTHONPATH=$SHARCLIB:$PYTHONPATH
+export LD_LIBRARY_PATH=$SHARCLIB:$LD_LIBRARY_PATH
